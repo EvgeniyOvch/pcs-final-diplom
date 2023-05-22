@@ -14,7 +14,7 @@ public class Client {
                     (new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-            out.println("все");
+            out.println("БиЗнес");
 
             String response;
             while ((response = in.readLine()) != null) {

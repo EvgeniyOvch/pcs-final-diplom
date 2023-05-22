@@ -47,7 +47,6 @@ public class BooleanSearchEngine implements SearchEngine {
     @Override
     public List<PageEntry> search(String word) {
         List<PageEntry> result = totalWords.get(word);
-        Collections.sort(result);
         // тут реализуйте поиск по слову
         return result;
     }

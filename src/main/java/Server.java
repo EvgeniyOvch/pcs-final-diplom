@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Server {
     private final int port;
+    private final String notFound = "Ничего не найдено!";
     private final BooleanSearchEngine searchResult;
 
     public Server(int port) throws IOException {
@@ -21,11 +22,15 @@ public class Server {
                      PrintWriter out = new PrintWriter(socket.getOutputStream())) {
 
                     String answer = in.readLine();
-                    List<PageEntry> resultList = searchResult.search(answer);
+                    List<PageEntry> resultList = searchResult.search(answer.toLowerCase());
 
-                    ParserToJson parserToJson = new ParserToJson();
-                    String gson = parserToJson.listToJson(resultList);
-                    out.println(gson);
+                    if (resultList == null) {
+                        out.println(notFound);
+                    } else {
+                        ParserToJson parserToJson = new ParserToJson();
+                        String gson = parserToJson.listToJson(resultList);
+                        out.println(gson);
+                    }
                 }
             }
         } catch (IOException e) {
